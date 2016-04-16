@@ -8,8 +8,8 @@ SCENARIO("Matrix init", "[init]") {
 
 	GIVEN("The number of rows and columns") {
 
-		auto rows = 6;
-		auto columns = 6;
+		auto rows = 5;
+		auto columns = 5;
 
 		WHEN("Create instansce of Matrix") {
 			Matrix matrix(rows, columns);
@@ -93,11 +93,8 @@ SCENARIO("Matrix operator [](int)", "[s]")
 	Matrix matrix(5,5);
 	matrix.set_matrix("1.txt");
 	int* s = matrix[1];
-	REQUIRE(s[0]==1);
-	REQUIRE(s[1]==2);
-	REQUIRE(s[2]==3);
-	REQUIRE(s[3]==4);
-	REQUIRE(s[4]==5);
+	REQUIRE(s[0]==6);
+
 }
 
 SCENARIO("Iscl_[]", "[s]"){
