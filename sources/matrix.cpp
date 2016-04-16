@@ -24,7 +24,7 @@ using namespace std;
 		}
 	}
 
-	Matrix::~Matrix()
+	Matrix::~Matrix() 
 	{
 		if (p != nullptr)
 		{
