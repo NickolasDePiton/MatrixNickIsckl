@@ -61,7 +61,7 @@ SCENARIO("Matrix *", "[mult]") {
 	matrix.set_matrix("1.txt");
 	Matrix matrixg(5, 5);
 	matrixg.set_matrix("2.txt");
-	Matrix expected(2, 2);
+	Matrix expected(5, 5);
 	expected.set_matrix("1_2.txt");
 	Matrix result = matrix * matrixg;
 	REQUIRE(result == expected);
