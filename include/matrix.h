@@ -8,36 +8,64 @@ using namespace std;
 
 class Isclucheniya {
 public:
-	int FileNotOpen();
-	int Razmery();
-	int WrongIndex();
-	int Samoprisvaivanie();
+	Isclucheniya(char* _err);
+	char* what();
 private:
-	int err;	
+	char* err;
 };
 
+class Razmery : public Isclucheniya{
+	char* err;
+public:
+	Razmery();
+	char* what();
+};
+
+class WrongIndex : public Isclucheniya{
+	char* err;
+public:
+	WrongIndex();
+	char* what();
+};
+
+class FileNotOpen : public Isclucheniya{
+	char* err;
+public:
+	FileNotOpen();
+	char* what();
+};
+
+class Samoprisvaivanie: public Isclucheniya{
+	char* err;
+public:
+	Samoprisvaivanie();
+	char* what();
+};
+
+
+template <class T>
 class Matrix{
 	
 public:
 	Matrix();
-	Matrix(int _n, int _m);
-	Matrix(const Matrix &M);
+	Matrix(int _lines, int _columns);
+	Matrix(const Matrix &a);
 	~Matrix();
-	void set_matrix(char* a) const;
+	void set_matrix(char* s) const;
 	void print() const;
-	Matrix operator +(const Matrix &M2) const;
-	Matrix operator *(const Matrix &M2) const;
-	int* operator [] (int k) const;
-	int getnumstr() const;
-	int getnumcol() const;
-	Matrix& operator = (const Matrix &M);
-	bool operator ==(const Matrix &M2) const;
+	Matrix operator +(const Matrix &array) const;
+	Matrix operator *(const Matrix &array) const;
+	T* operator [] (int k) const;
+	int cout_lines() const;
+	int cout_columns() const;
+	Matrix& operator = (const Matrix &a);
+	bool operator ==(const Matrix &array) const;
 
 private:
-	int n;
-	int m;
-	int **p;
-
+	int lines;
+	int columns;
+	T **massiv;
 };
 
+#include "matrix.cpp"
 #endif
