@@ -192,8 +192,8 @@ SCENARIO("Matrix operator [](int)", "[s]")
 	Matrix<int> matrix(2, 2);
 	matrix.set_matrix("1.txt");
 	int* s = matrix[1];
-	REQUIRE(s[0]==3);
-	REQUIRE(s[1]==4);
+	REQUIRE(s[0]==1);
+	REQUIRE(s[1]==1);
 }
 
 SCENARIO("Matrix operator [](long)", "[s]") 
@@ -201,8 +201,8 @@ SCENARIO("Matrix operator [](long)", "[s]")
 	Matrix<long> matrix(2, 2);
 	matrix.set_matrix("2.txt");
 	long* s = matrix[1];
-	REQUIRE(s[0]==3);
-	REQUIRE(s[1]==4);
+	REQUIRE(s[0]==1);
+	REQUIRE(s[1]==1);
 }
 
 SCENARIO("Matrix operator [](double)", "[s]") 
