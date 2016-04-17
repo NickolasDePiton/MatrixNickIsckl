@@ -10,10 +10,10 @@ template <class T>
 	class Matrix;
 
 	template <class T>
-	ostream & operator<<(ostream & output, const Matrix<Z> &);
+	ostream & operator<<(ostream & output, const Matrix<T> &);
 
 	template <class T>
-	istream & operator>>(istream & input, Matrix<Z> &);
+	istream & operator>>(istream & input, Matrix<T> &);
 
 class Isclucheniya {
 public:
