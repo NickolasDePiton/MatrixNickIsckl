@@ -1,135 +1,146 @@
+#pragma once
 #include "matrix.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
 
-	int Isclucheniya::FileNotOpen(){ err = 1; cout <<"error_"<< err <<": file not open\n"; return err; }
-	int Isclucheniya::Razmery() { err = 2; cout << "error_" << err << ": nevernye razmery\n"; return err; }
-	int Isclucheniya::WrongIndex() { err = 3; cout << "error_" << err << ": wrong index\n"; return err; }
-	int Isclucheniya::Samoprisvaivanie() { err = 4; cout << "error_" << err << ": samoprisvaivanie\n"; return err; }
 
-	Matrix::Matrix() : n(0), m(0), p(nullptr) {}
-
-	Matrix::Matrix(int _n, int _m) : n(_n), m(_m){
-		p = new int*[n];
-		for (int i = 0; i < n; i++) { p[i] = new int[m]; }
+	Isclucheniya::Isclucheniya(char* _err): err(_err){}
+	char* Isclucheniya:: what() {return err;}
+	
+	Razmery::Razmery(): Isclucheniya("ERROR: nevernye razmery!") {}
+	char* Razmery:: what() {return err;}
+	
+	FileNotOpen::FileNotOpen(): Isclucheniya("ERROR: file not open!") {}
+	char* FileNotOpen:: what() {return err;}
+	
+	WrongIndex::WrongIndex(): Isclucheniya("ERROR: wrong index!") {}
+	char* WrongIndex:: what() {return err;}
+	
+	Samoprisvaivanie::Samoprisvaivanie(): Isclucheniya("ERROR: samoprisvaivanie!") {}
+	char* Samoprisvaivanie:: what() {return err;}
+	
+	template <class T>
+	Matrix<T>::Matrix() : lines(0), columns(0), massiv(nullptr) {}
+	template <class T>
+	Matrix<T>::Matrix(int _lines, int _columns) : lines(_lines), columns(_columns){
+		massiv = new T*[lines];
+		for (int i = 0; i < lines; i++) { massiv[i] = new T[columns]; }
 	}
-
-	Matrix::Matrix(const Matrix &M) : n(M.n), m(M.m) {
-		p = new int*[n];
-		for (int i = 0; i < n; i++){
-			p[i] = new int[m];
-			for (int j = 0; j < m; j++)
-				p[i][j] = M.p[i][j];
+	template <class T>
+	Matrix<T>::Matrix(const Matrix &a) : lines(a.lines), columns(a.columns) {
+		massiv = new T*[lines];
+		for (int i = 0; i < lines; i++){
+			massiv[i] = new T[columns];
+			for (int j = 0; j < columns; j++)
+				massiv[i][j] = a.massiv[i][j];
 		}
 	}
-
-	Matrix::~Matrix() 
+	template <class T>
+	Matrix<T>::~Matrix()
 	{
-		if (p != nullptr)
+		if (massiv != nullptr)
 		{
-			for (int i = 0; i < n; i++)
+			for (int i = 0; i < lines; i++)
 			{
-				delete[] p[i];
+				delete[] massiv[i];
 			}
-			delete[] p;
+			delete[] massiv;
 		}
 	}
-
-	void Matrix::set_matrix(char* a) const{
+	template <class T>
+	void Matrix<T>::set_matrix(char* s) const{
 		ifstream fin;
-		fin.open(a);
+		fin.open(s);
 		if (!fin.is_open()) {
-			Isclucheniya E;
-			throw E.FileNotOpen();
+			throw FileNotOpen();
 		}
-		for (int i = 0; i < n; i++){
-			for (int j = 0; j < m; j++)
-				fin >> p[i][j];
+		for (int i = 0; i < lines; i++){
+			for (int j = 0; j < columns; j++)
+				fin >> massiv[i][j];
 		}
 	}
-
-	void Matrix::print() const{
-		for (int i = 0; i < n; i++){
-			for (int j = 0; j < m; j++)
-				cout << p[i][j] << " ";
+	template <class T>
+	void Matrix<T>::print() const{
+		for (int i = 0; i < lines; i++){
+			for (int j = 0; j < columns; j++)
+				cout << massiv[i][j] << " ";
 			cout << "\n";
 		}
 	}
-
-	Matrix Matrix::operator +(const Matrix &M2) const{
-		if ((n != M2.n) || (m != M2.m)) {
-			Isclucheniya E;
-			throw E.Razmery();
+	template <class T>
+	Matrix<T> Matrix<T>::operator +(const Matrix &array) const{
+		if ((lines != array.lines) || (coluns != array.columns)) {
+			throw Razmery();
 		}
-		Matrix M_res(M2.n, M2.m);
-		for (int i = 0; i < M2.n; i++)
-		for (int j = 0; j < M2.m; j++)
-			M_res.p[i][j] = p[i][j] + M2.p[i][j];
+		Matrix<T> M_res(array.lines, array.columns);
+		for (int i = 0; i < array.lines; i++)
+		for (int j = 0; j < array.columns; j++)
+			M_res.massiv[i][j] = massiv[i][j] + array.massiv[i][j];
 		cout << "M1+M2:\n";  M_res.print();
 		return M_res;
 	}
-	Matrix Matrix::operator *(const Matrix &M2) const{
-		if (m != M2.n){ 
-			Isclucheniya E;
-			throw E.Razmery();
+	template <class T>
+	Matrix<T> Matrix<T>::operator *(const Matrix &array) const{
+		if (columns != array.lines){
+			throw Razmery();
 	}
-		Matrix M_res(n, M2.m);
-		for (int i = 0; i < n; i++)
-		for (int j = 0; j < M2.m; j++)
+		Matrix<T> M_res(lines, array.columns);
+		for (int i = 0; i < lines; i++)
+		for (int j = 0; j < array.columns; j++)
 		{
-			M_res.p[i][j] = 0;
-			for (int k = 0; k < M2.m; k++)
-				M_res.p[i][j] += (p[i][k] * M2.p[k][j]);
+			M_res.massiv[i][j] = 0;
+			for (int k = 0; k < array.columns; k++)
+				M_res.massiv[i][j] += (massiv[i][k] * array.massiv[k][j]);
 		}
 		cout << "M1*M2:\n";  M_res.print();
 		return M_res;
 	}
-
-	int* Matrix::operator [] (int k) const{
-		if ((k < 0) || (k >= n)){ Isclucheniya E; throw E.WrongIndex(); }
-		int *r = new int[m];
-		for (int j = 0; j < m; j++){
-			r[j] = p[k][j];
+	template <class T>
+	T* Matrix<T>::operator [] (int k) const{
+		if ((k < 0) || (k >= lines)){ throw WrongIndex(); }
+		T *r = new T[m];
+		for (int j = 0; j < columns; j++){
+			r[j] = massiv[k][j];
 		}
 		return r;
 	}
-
-	int Matrix::getnumstr() const{
-		return n;
+	template <class T>
+	int Matrix<T>::cout_lines() const{
+		return lines;
 	}
-
-	int Matrix::getnumcol() const{
-		return m;
+	template <class T>
+	int Matrix<T>::cout_columns() const{
+		return columns;
 	}
-
-	Matrix& Matrix::operator = (const Matrix &M) {
-		if (this == &M){
-		Isclucheniya E; throw E.Samoprisvaivanie(); 	
+	template <class T>
+	Matrix<T>& Matrix<T>::operator = (const Matrix &a) {
+		if (this == &a){
+		throw Samoprisvaivanie(); 	
 		}
-			if (p != nullptr){
-				for (int i = 0; i < n; i++){
-					delete[] p[i];
+			if (massiv != nullptr){
+				for (int i = 0; i < lines; i++){
+					delete[] massiv[i];
 				}
-				delete[] p;
+				delete[] massiv;
 			}
-			n = M.n;
-			m = M.m;
-			p = new int*[n];
-			for (int i = 0; i < n; i++){
-				p[i] = new int[m];
-				for (int j = 0; j < m; j++) { p[i][j] = M.p[i][j]; }
+			lines = a.lines;
+			columns = a.columns;
+			massiv = new T*[lines];
+			for (int i = 0; i < lines; i++){
+				massiv[i] = new T[columns];
+				for (int j = 0; j < columns; j++) { massiv[i][j] = a.massiv[i][j]; }
 			}
 			return *this;
 	}
-
-	bool Matrix::operator ==(const Matrix &M2) const{
-		if (n != M2.n || m != M2.m)
+	template <class T>
+	bool Matrix<T>::operator ==(const Matrix &array) const{
+		if (lines != array.lines || columns != array.columns)
 			return false; 
 
-		for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++)
-		if (p[i][j] != M2.p[i][j])
+		for (int i = 0; i < lines; i++)
+		for (int j = 0; j < columns; j++)
+		if (massiv[i][j] != array.massiv[i][j])
 			return false;
 
 		return true; 
