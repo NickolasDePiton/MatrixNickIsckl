@@ -69,6 +69,8 @@ public:
 	int cout_columns() const;
 	Matrix& operator = (const Matrix &a);
 	bool operator ==(const Matrix &array) const;
+	friend ostream & operator<< <>(ostream & output, const Matrix<T> & matrix);
+	friend istream & operator>> <>(istream & input, Matrix<T> & matrix);	
 
 private:
 	int lines;
