@@ -70,7 +70,7 @@ using namespace std;
 	}
 	template <class T>
 	Matrix<T> Matrix<T>::operator +(const Matrix &array) const{
-		if ((lines != array.lines) || (coluns != array.columns)) {
+		if ((lines != array.lines) || (columns != array.columns)) {
 			throw Razmery();
 		}
 		Matrix<T> M_res(array.lines, array.columns);
@@ -99,7 +99,7 @@ using namespace std;
 	template <class T>
 	T* Matrix<T>::operator [] (int k) const{
 		if ((k < 0) || (k >= lines)){ throw WrongIndex(); }
-		T *r = new T[m];
+		T *r = new T[columns];
 		for (int j = 0; j < columns; j++){
 			r[j] = massiv[k][j];
 		}
