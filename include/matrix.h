@@ -66,5 +66,5 @@ private:
 	int columns;
 	T **massiv;
 };
-
+#include "matrix.cpp"
 #endif
