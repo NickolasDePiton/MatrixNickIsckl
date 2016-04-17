@@ -8,7 +8,7 @@ SCENARIO("Matrix init", "[init]") {
 
 	GIVEN("The number of lines and columns") {
 
-		auto rows = 3;
+		auto lines = 3;
 		auto columns = 3;
 
 		WHEN("Create instansce of Matrix") {
@@ -26,7 +26,7 @@ SCENARIO("Matrix init_long", "[init]") {
 
 	GIVEN("The number of lines and columns") {
 
-		auto rows = 3;
+		auto lines = 3;
 		auto columns = 3;
 
 		WHEN("Create instansce of Matrix") {
@@ -44,7 +44,7 @@ SCENARIO("Matrix init_double", "[init]") {
 
 	GIVEN("The number of lines and columns") {
 
-		auto rows = 3;
+		auto lines = 3;
 		auto columns = 3;
 
 		WHEN("Create instansce of Matrix") {
@@ -97,7 +97,7 @@ SCENARIO("Matrix +_d", "[summ]") {
 	matrixg.set_matrix("2double.txt");
 	Matrix<double> expected(2, 2);
 	expected.set_matrix("1+2double.txt");
-	Matrix<double> result = matix + matrixg;
+	Matrix<double> result = matrix + matrixg;
 	REQUIRE(result == expected);
 }
 
@@ -191,7 +191,7 @@ SCENARIO("Matrix operator [](int)", "[s]")
 {
 	Matrix<int> matrix(2, 2);
 	matrix.set_matrix("1.txt");
-	int* s = A[1];
+	int* s = matrix[1];
 	REQUIRE(s[0]==3);
 	REQUIRE(s[1]==4);
 }
@@ -200,7 +200,7 @@ SCENARIO("Matrix operator [](long)", "[s]")
 {
 	Matrix<long> matrix(2, 2);
 	matrix.set_matrix("2.txt");
-	long* s = A[1];
+	long* s = matrix[1];
 	REQUIRE(s[0]==3);
 	REQUIRE(s[1]==4);
 }
