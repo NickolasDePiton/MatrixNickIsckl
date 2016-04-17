@@ -154,3 +154,26 @@ template <class T>
 
 		return true; 
 	}
+template <typename T>
+	ostream & operator<<(ostream & output, const Matrix<T> & matrix)
+	{
+		for (int i = 0; i < matrix.lines; i++) {
+			output << endl;
+			for (unsigned int j = 0; j < matrix.columns; j++) {
+				output << matrix.massiv[i][j] << " ";
+			}
+		}
+
+		return output;
+	}
+
+	template <typename T>
+	istream & operator>>(istream & input, Matrix<T> & matrix)
+	{
+		for (unsigned int i = 0; i < matrix.lines; i++) {
+			for (unsigned int j = 0; j < matrix.columns; j++) {
+				input >> matrix.massiv[i][j];
+			}
+		}
+		return input;
+	}
