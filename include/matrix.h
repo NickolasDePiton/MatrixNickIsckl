@@ -67,5 +67,4 @@ private:
 	T **massiv;
 };
 
-#include "matrix.cpp"
 #endif
