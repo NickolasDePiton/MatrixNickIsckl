@@ -160,7 +160,7 @@ template <typename T>
 		for (int i = 0; i < matrix.lines; i++) {
 			output << endl;
 			for (unsigned int j = 0; j < matrix.columns; j++) {
-				output << matrix.massiv[i][j] << " ";
+				output << matrix.massiv[i][j] << endl;
 			}
 		}
 
