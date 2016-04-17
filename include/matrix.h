@@ -6,6 +6,15 @@
 #include <fstream>
 using namespace std;
 
+template <class T>
+	class Matrix;
+
+	template <class T>
+	ostream & operator<<(ostream & output, const Matrix<Z> &);
+
+	template <class T>
+	istream & operator>>(istream & input, Matrix<Z> &);
+
 class Isclucheniya {
 public:
 	Isclucheniya(char* _err);
