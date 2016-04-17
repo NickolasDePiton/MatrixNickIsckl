@@ -103,14 +103,14 @@ SCENARIO("Matrix +_d", "[summ]") {
 
 SCENARIO("Iscl_martrix +","[summ]"){
 	int O=0;
-	Matrix<int> matrix(2, 2);
+	Matrix<int> matrix(1, 2);
 	matrix.set_matrix("1.txt");
 	Matrix<int> matrixg(2, 2);
 	matrixg.set_matrix("2.txt");	
 	try{
 		matrix+matrixg;
 	}
-	catch (Isclucheniya &e) {if (e.what() == "ERROR: nevernye razmery!") O++;}
+	catch (Razmery &e) { O++;}
 	REQUIRE(O==1);
 }
 
@@ -151,12 +151,12 @@ SCENARIO("Iscl_martrix *","[mult]"){
 	int O=0;
 	Matrix<int> matrix(2, 2);
 	matrix.set_matrix("1.txt");
-	Matrix<int> matrixg(2, 2);
+	Matrix<int> matrixg(1, 2);
 	matrixg.set_matrix("2.txt");	
 	try{
 		matrix * matrixg;
 	}
-	catch (Isclucheniya &e) {if (e.what() == "ERROR: nevernye razmery!") O++;}
+	catch (Razmery &e) {O++;}
 	REQUIRE(O==1);
 }
 
