@@ -4,6 +4,15 @@
 #include <fstream>
 using namespace std;
 
+template <class T>
+	class Matrix;
+
+	template <class T>
+	ostream & operator<<(ostream & output, const Matrix<T> &);
+
+	template <class T>
+	istream & operator>>(istream & input, Matrix<T> &);
+
 
 	Isclucheniya::Isclucheniya(char* _err): err(_err){}
 	char* Isclucheniya:: what() {return err;}
