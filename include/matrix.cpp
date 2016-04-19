@@ -45,7 +45,33 @@ template <class T>
 				massiv[i][j] = a.massiv[i][j];
 		}
 	}
+	
 	template <class T>
+	Matrix<T> Matrix<T>::operator *(const Matrix &array) const{
+		if (columns != array.lines){
+			throw Razmery();
+	}
+		Matrix<T> M_res(lines, array.columns);
+		for (int i = 0; i < lines; i++)
+		for (int j = 0; j < array.columns; j++)
+		{
+			M_res.massiv[i][j] = 0;
+			for (int k = 0; k < array.columns; k++)
+				M_res.massiv[i][j] += (massiv[i][k] * array.massiv[k][j]);
+		}
+		cout << "M1*M2:\n";  M_res.print();
+		return M_res;
+	}
+	template <class T>
+	T* Matrix<T>::operator [] (int k) const{
+		if ((k < 0) || (k >= lines)){ throw WrongIndex(); }
+		T *r = new T[columns];
+		for (int j = 0; j < columns; j++){
+			r[j] = massiv[k][j];
+		}
+		return r;
+	}
+		template <class T>
 	Matrix<T>::~Matrix()
 	{
 		if (massiv != nullptr)
@@ -88,31 +114,6 @@ template <class T>
 			M_res.massiv[i][j] = massiv[i][j] + array.massiv[i][j];
 		cout << "M1+M2:\n";  M_res.print();
 		return M_res;
-	}
-	template <class T>
-	Matrix<T> Matrix<T>::operator *(const Matrix &array) const{
-		if (columns != array.lines){
-			throw Razmery();
-	}
-		Matrix<T> M_res(lines, array.columns);
-		for (int i = 0; i < lines; i++)
-		for (int j = 0; j < array.columns; j++)
-		{
-			M_res.massiv[i][j] = 0;
-			for (int k = 0; k < array.columns; k++)
-				M_res.massiv[i][j] += (massiv[i][k] * array.massiv[k][j]);
-		}
-		cout << "M1*M2:\n";  M_res.print();
-		return M_res;
-	}
-	template <class T>
-	T* Matrix<T>::operator [] (int k) const{
-		if ((k < 0) || (k >= lines)){ throw WrongIndex(); }
-		T *r = new T[columns];
-		for (int j = 0; j < columns; j++){
-			r[j] = massiv[k][j];
-		}
-		return r;
 	}
 	template <class T>
 	int Matrix<T>::cout_lines() const{
