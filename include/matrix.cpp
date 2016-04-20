@@ -141,7 +141,7 @@ template <class T>
 	}
 	template <class T>
 	bool Matrix<T>::operator ==(const Matrix &M) const{
-		if (lines != M.lines || columns != Molumns)
+		if (lines != M.lines || columns != M.columns)
 			return false; 
 
 		for (int i = 0; i < lines; i++)
