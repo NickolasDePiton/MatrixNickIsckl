@@ -18,16 +18,12 @@ template <class T>
 	char* Isclucheniya:: what() {return err;}
 	
 	Razmery::Razmery(): Isclucheniya("ERROR: nevernye razmery!") {}
-	char* Razmery:: what() {return err;}
 	
 	FileNotOpen::FileNotOpen(): Isclucheniya("ERROR: file not open!") {}
-	char* FileNotOpen:: what() {return err;}
 	
 	WrongIndex::WrongIndex(): Isclucheniya("ERROR: wrong index!") {}
-	char* WrongIndex:: what() {return err;}
 	
 	Samoprisvaivanie::Samoprisvaivanie(): Isclucheniya("ERROR: samoprisvaivanie!") {}
-	char* Samoprisvaivanie:: what() {return err;}
 	
 	template <class T>
 	Matrix<T>::Matrix() : lines(0), columns(0), massiv(nullptr) {}
@@ -47,17 +43,17 @@ template <class T>
 	}
 	
 	template <class T>
-	Matrix<T> Matrix<T>::operator *(const Matrix &array) const{
-		if (columns != array.lines){
+	Matrix<T> Matrix<T>::operator *(const Matrix &M) const{
+		if (columns != M.lines){
 			throw Razmery();
 	}
-		Matrix<T> M_res(lines, array.columns);
+		Matrix<T> M_res(lines, M.columns);
 		for (int i = 0; i < lines; i++)
-		for (int j = 0; j < array.columns; j++)
+		for (int j = 0; j < M.columns; j++)
 		{
 			M_res.massiv[i][j] = 0;
-			for (int k = 0; k < array.columns; k++)
-				M_res.massiv[i][j] += (massiv[i][k] * array.massiv[k][j]);
+			for (int k = 0; k < M.columns; k++)
+				M_res.massiv[i][j] += (massiv[i][k] * M.massiv[k][j]);
 		}
 		cout << "M1*M2:\n";  M_res.print();
 		return M_res;
@@ -104,14 +100,14 @@ template <class T>
 		}
 	}
 	template <class T>
-	Matrix<T> Matrix<T>::operator +(const Matrix &array) const{
-		if ((lines != array.lines) || (columns != array.columns)) {
+	Matrix<T> Matrix<T>::operator +(const Matrix &M) const{
+		if ((lines != M.lines) || (columns != M.columns)) {
 			throw Razmery();
 		}
-		Matrix<T> M_res(array.lines, array.columns);
-		for (int i = 0; i < array.lines; i++)
-		for (int j = 0; j < array.columns; j++)
-			M_res.massiv[i][j] = massiv[i][j] + array.massiv[i][j];
+		Matrix<T> M_res(M.lines, M.columns);
+		for (int i = 0; i < M.lines; i++)
+		for (int j = 0; j < M.columns; j++)
+			M_res.massiv[i][j] = massiv[i][j] + M.massiv[i][j];
 		cout << "M1+M2:\n";  M_res.print();
 		return M_res;
 	}
@@ -144,13 +140,13 @@ template <class T>
 			return *this;
 	}
 	template <class T>
-	bool Matrix<T>::operator ==(const Matrix &array) const{
-		if (lines != array.lines || columns != array.columns)
+	bool Matrix<T>::operator ==(const Matrix &M) const{
+		if (lines != M.lines || columns != Molumns)
 			return false; 
 
 		for (int i = 0; i < lines; i++)
 		for (int j = 0; j < columns; j++)
-		if (massiv[i][j] != array.massiv[i][j])
+		if (massiv[i][j] != M.massiv[i][j])
 			return false;
 
 		return true; 
