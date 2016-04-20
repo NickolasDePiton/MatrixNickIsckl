@@ -6,42 +6,49 @@
 #include <fstream>
 using namespace std;
 
-template <class T>
-class Matrix;
+template <class Z>
+	class Matrix;
 
+	template <class Z>
+	ostream & operator<<(ostream & output, const Matrix<Z> &);
+
+	template <class Z>
+	istream & operator>>(istream & input, Matrix<Z> &);
+	
 class Isclucheniya {
-	char* err;
 public:
-	Isclucheniya(char* _err) : err(_err) {}
-	virtual char* what() { return err; }
+	Isclucheniya(char* _err);
+	char* what();
+private:
+	char* err;
 };
 
 class Razmery : public Isclucheniya{
 	char* err;
 public:
-	Razmery() : Isclucheniya("ERROR: nevernye razmery!") {};
-	char* what() { return err; };
+	Razmery();
+	char* what();
 };
 
 class WrongIndex : public Isclucheniya{
 	char* err;
 public:
-	WrongIndex() : Isclucheniya("ERROR: wrong index!") {};
-	char* what() { return err; };
+	WrongIndex();
+	char* what();
 };
 
 class FileNotOpen : public Isclucheniya{
 	char* err;
 public:
-	FileNotOpen() : Isclucheniya("ERROR: file not open!") {};
-	char* what() { return err; };
+	FileNotOpen();
+	char* what();
 };
 
 class Samoprisvaivanie: public Isclucheniya{
 	char* err;
 public:
-	Samoprisvaivanie() : Isclucheniya("ERROR: samoprisvaivanie!") {};
-	char* what() { return err; };
+	Samoprisvaivanie();
+	char* what();
 };
 
 template <class T>
