@@ -65,8 +65,8 @@ public:
 	Matrix operator +(const Matrix &array) const;
 	Matrix operator *(const Matrix &array) const;
 	T* operator [] (int k) const;
-	int get_lines() const;
-	int get_columns() const;
+	int get_number_lines() const;
+	int get_number_columns() const;
 	Matrix& operator = (const Matrix &a);
 	bool operator ==(const Matrix &array) const;
 	friend ostream & operator<< <>(ostream & output, const Matrix<T> & matrix);
