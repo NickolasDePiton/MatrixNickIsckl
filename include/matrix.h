@@ -24,31 +24,23 @@ private:
 };
 
 class Razmery : public Isclucheniya{
-	char* err;
 public:
 	Razmery();
-	char* what();
 };
 
 class WrongIndex : public Isclucheniya{
-	char* err;
 public:
 	WrongIndex();
-	char* what();
 };
 
 class FileNotOpen : public Isclucheniya{
-	char* err;
 public:
 	FileNotOpen();
-	char* what();
 };
 
 class Samoprisvaivanie: public Isclucheniya{
-	char* err;
 public:
 	Samoprisvaivanie();
-	char* what();
 };
 
 
