@@ -13,7 +13,7 @@ template <class T>
 	ostream & operator<<(ostream & output, const Matrix<T> &);
 
 	template <class T>
-	istream & operator>>(istream & input, Matrix<T> &);
+	istream & operator>>(istream & input, Matrix<T> &); 
 	
 class Isclucheniya {
 public:
