@@ -6,14 +6,14 @@
 #include <fstream>
 using namespace std;
 
-template <class Z>
+template <class T>
 	class Matrix;
 
-	template <class Z>
-	ostream & operator<<(ostream & output, const Matrix<Z> &);
+	template <class T>
+	ostream & operator<<(ostream & output, const Matrix<T> &);
 
-	template <class Z>
-	istream & operator>>(istream & input, Matrix<Z> &);
+	template <class T>
+	istream & operator>>(istream & input, Matrix<T> &);
 	
 class Isclucheniya {
 public:
@@ -51,13 +51,6 @@ public:
 	char* what();
 };
 
-template <class T>
-ostream & operator<<(ostream & output, const Matrix<T> &);
-
-template <class T>
-istream & operator>>(istream & input, Matrix<T> &);
-
-template <class T>
 
 template <class T>
 class Matrix{
