@@ -15,8 +15,8 @@ SCENARIO("Matrix init", "[init]") {
 			Matrix<int> matrix(lines, columns);
 			THEN("The number of lines and columns must be preserved") {
 
-				REQUIRE(matrix.cout_lines() == lines);
-				REQUIRE(matrix.cout_columns() == columns);
+				REQUIRE(matrix.get_lines() == lines);
+				REQUIRE(matrix.get_columns() == columns);
 			}
 		}
 	}
@@ -33,8 +33,8 @@ SCENARIO("Matrix init_long", "[init]") {
 			Matrix<long> matrix(lines, columns);
 			THEN("The number of rows and columns must be preserved") {
 
-				REQUIRE(matrix.cout_lines() == lines);
-				REQUIRE(matrix.cout_columns() == columns);
+				REQUIRE(matrix.get_lines() == lines);
+				REQUIRE(matrix.get_columns() == columns);
 			}
 		}
 	}
@@ -51,8 +51,8 @@ SCENARIO("Matrix init_double", "[init]") {
 			Matrix<double> matrix(lines, columns);
 			THEN("The number of lines and columns must be preserved") {
 
-				REQUIRE(matrix.cout_lines() == lines);
-				REQUIRE(matrix.cout_columns() == columns);
+				REQUIRE(matrix.get_lines() == lines);
+				REQUIRE(matrix.get_columns() == columns);
 			}
 		}
 	}
