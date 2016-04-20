@@ -116,11 +116,11 @@ template <class T>
 		return M_res;
 	}
 	template <class T>
-	int Matrix<T>::cout_lines() const{
+	int Matrix<T>::get_number_lines() const{
 		return lines;
 	}
 	template <class T>
-	int Matrix<T>::cout_columns() const{
+	int Matrix<T>::get_number_columns() const{
 		return columns;
 	}
 	template <class T>
