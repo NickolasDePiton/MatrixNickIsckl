@@ -62,13 +62,13 @@ public:
 	~Matrix();
 	void set_matrix(char* s) const;
 	void print() const;
-	Matrix operator +(const Matrix &array) const;
-	Matrix operator *(const Matrix &array) const;
+	Matrix operator +(const Matrix &M) const;
+	Matrix operator *(const Matrix &M) const;
 	T* operator [] (int k) const;
 	int get_number_lines() const;
 	int get_number_columns() const;
 	Matrix& operator = (const Matrix &a);
-	bool operator ==(const Matrix &array) const;
+	bool operator ==(const Matrix &M) const;
 	friend ostream & operator<< <>(ostream & output, const Matrix<T> & matrix);
 	friend istream & operator>> <>(istream & input, Matrix<T> & matrix);	
 
